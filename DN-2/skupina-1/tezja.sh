@@ -33,13 +33,14 @@ while [ $# -gt 0 ]; do
     fi
 done
 
-# Vzorec za preverjanje velike zacetnice.
-velika_zacetnica="^[[:upper:]]"
-
 # Parse metoda bo sedaj namesto besed izpisala za vsako besedo velikost zacetnice.
 parse() {
     for word in $(grep -o "$WORD" "$1"); do
-        if [[ $word =~ $velika_zacetnica ]]; then
+        # Shrani se zacetnica besede, ce bo ta po povecanju se vedno enaka,
+        # to pomeni, da gre za veliko zacetnico.
+        zacetnica=${word:0:1}
+    
+        if [ $zacetnica = ${zacetnica^^} ]; then
             echo "velika"
         else
             echo "mala"
