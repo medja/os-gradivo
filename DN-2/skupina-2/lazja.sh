@@ -14,7 +14,7 @@ while [ $# -gt 0 ]; do
             -l)
                 word_length=$2
                 ;;
-            # Stikalo -c shrani svojo vrednost, kot zacetno crko.
+            # Stikalo -c shrani svojo vrednost, kot začetno črko.
             -c)
                 prva_crka="$2"
                 ;;
