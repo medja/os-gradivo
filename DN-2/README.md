@@ -51,14 +51,15 @@ ana.sh text.txt
 Napaka: datoteka text.txt ne obstaja.
 ```
 
-*Uporabljajte lahko le **bash in ne drugih programskih jezikov** (odpadeta tudi
+_Uporabljajte lahko le **bash in ne drugih programskih jezikov** (odpadeta tudi
 awk in sed)! Za računanje z decimalnimi števili uporabite ukaz **bc** ali
 **dc**. Ne spreminjati datotek z besedilom in ne ustvarjajte novih datotek.
-Svoj program optimizirajte. Za najhitrejši program dobite dodatne točke.*
+Svoj program optimizirajte. Za najhitrejši program dobite dodatne točke._
 
 ---
 
-Primeri delovanja skripte so prikazani spodaj. Primeri ilustrirajo delovanje nad tekstovno datoteko besedilo.txt
+Primeri delovanja skripte so prikazani spodaj. Primeri ilustrirajo delovanje nad
+tekstovno datoteko besedilo.txt
 
 Vsebina datoteke besedilo.txt:
 
@@ -90,7 +91,9 @@ Vsebina datoteke besedilo.txt:
 ```
 ./ana.sh -n 2 -l 3 besedilo.txt
 2 nad 1.75%
+```
 
+```
 ./ana.sh -n 2 -l 2 besedilo.txt
 9 je 7.89%
 4 se 3.50%
