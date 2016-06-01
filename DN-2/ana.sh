@@ -72,7 +72,7 @@ done
 # Funkcija parse prejme ime datoteke in izpiše besede z majhnimi črkami
 parse() {
     # Grep z stikalom -o izpiše vsako ujemanje v svoji vrstici.
-    # Ker je podan vzorec za besede, torej izpiše vsako besedo v svoji vrstici
+    # Ker je podan vzorec za besede, torej izpiše vsako besedo v svoji vrstici.
     for word in $(grep -o "$WORD" "$1"); do
         # ,, je razširitev, ko omogoča pretvorbo v majhne črke.
         echo ${word,,}
@@ -107,7 +107,8 @@ prepare() {
 }
 
 # (ponovitve, beseda, dolzina)... -> format(stevilo_besed) -> (ponovitve, beseda, frekvenca)...
-#
+# Funkcija format prejme na svoj vhod vrstice z besedami, ponovitvami in
+# njihovimi dolžinami ter odstrani dolžini in jih zamenja z frekvencami ponovitve.
 format() {
     while read count word length; do
         # Namesto ukazov, ki omogočajo računanje z decimalnimi števili,
