@@ -14,6 +14,10 @@ while [ $# -gt 0 ]; do
             -l)
                 word_length=$2
                 ;;
+            # Stikalo -p omeji število vrstic iz vhodne datoteke.
+            -p)
+                vrstic_besedila=$2
+                ;;
              *)
                 echo "Napaka: neznano stikalo $1." >&2
                 exit 1
@@ -34,7 +38,17 @@ while [ $# -gt 0 ]; do
 done
 
 parse() {
-    for word in $(grep -o "$WORD" "$1"); do
+    # Besedilo datoteke se tukaj shrani v spremenljivko.
+    # Če ni podana omejitev na številu vrstic se hrani celotno besedilo,
+    # drugače pa le prvih nekaj vrstic.
+    if [ -z $vrstic_besedila ]; then
+        besedilo=$(cat "$1")
+    else
+        besedilo=$(head -n $vrstic_besedila "$1")
+    fi
+    
+    # grep sedaj ne bere več direktno iz datoteke, temveč dobi vsebino že podano.
+    for word in $(grep -o "$WORD" <<< "$besedilo"); do
         echo ${word,,}
     done
 }
