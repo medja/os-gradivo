@@ -1,5 +1,7 @@
 ## Lažja naloga
 
+[lazja.sh](https://github.com/medja/os-gradivo/commit/28cfde3ee14c5eb7127dafc2d393e950f67bf28f)
+
 Stikalo –I naj pomeni, da razlikuje med malimi in velikimi črkami.
 
 ```
@@ -34,6 +36,8 @@ Stikalo –I naj pomeni, da razlikuje med malimi in velikimi črkami.
 ```
 
 ## Težja naloga
+
+[tezja.sh](https://github.com/medja/os-gradivo/commit/28cfde3ee14c5eb7127dafc2d393e950f67bf28f)
 
 Spremenite program, da v primeru, da mu ne podamo datoteke sprejema besedilo
 iz standardnega vhoda.

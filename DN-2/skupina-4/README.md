@@ -1,5 +1,7 @@
 ## Lažja naloga
 
+[lazja.sh](https://github.com/medja/os-gradivo/commit/28cfde3ee14c5eb7127dafc2d393e950f67bf28f)
+
 Dodajte stikalo –st, ki omeji izpis na st prvih besed.
 
 ```
@@ -13,6 +15,8 @@ Dodajte stikalo –st, ki omeji izpis na st prvih besed.
 Če ne znate, naredite tako, da številko podate stikalu –m.
 
 ## Težja naloga
+
+[tezja.sh](https://github.com/medja/os-gradivo/commit/28cfde3ee14c5eb7127dafc2d393e950f67bf28f)
 
 Program naj izpiše statistiko posameznih črk.
 
