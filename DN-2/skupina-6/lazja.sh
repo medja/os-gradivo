@@ -5,10 +5,6 @@ WORD="[[:alpha:]]*"
 min_count=1
 word_length=0
 
-# Primerjalni operator pri preverjanju dolžine besede.
-# Privzeto se izpišejo samo besede, ki imajo enako dolžino.
-omejitev="-eq"
-
 while [ $# -gt 0 ]; do
     if [ "${1:0:1}" = "-" ]; then
         case "$1" in
@@ -16,15 +12,7 @@ while [ $# -gt 0 ]; do
                 min_count=$2
                 ;;
             -l)
-                if [ ${2: -1} = "-" ]; then
-                    # Če ima število na koncu pomišljal,
-                    # je potrebno tega odstraniti.
-                    word_length=${2:0:-1}
-                    # V primeru pomišljala so lahko besede tudi daljše.
-                    omejitev="-ge"
-                else
-                    word_length=$2
-                fi
+                word_length=$2
                 ;;
              *)
                 echo "Napaka: neznano stikalo $1." >&2
@@ -59,10 +47,7 @@ prepare() {
         
         length=${#word}
         
-        # Za preverjanje dolžine se operator poda kot argument, ta je lahko ali
-        # -eq ali -ge. Odvisno od tega ali je zastavica za dolžino besede
-        # vsebovala pomišljaj.
-        if [ $word_length -eq 0 ] || [ $length $omejitev $word_length ]; then
+        if [ $word_length -eq 0 ] || [ $length -eq $word_length ]; then
             echo "$count $word $length"
         fi
     done

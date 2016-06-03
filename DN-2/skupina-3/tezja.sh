@@ -47,21 +47,14 @@ prepare() {
         
         length=${#word}
         
-        # S pomočjo ukaza tr se iz besede odstrani vse kar niso samoglasniki.
-        samoglasniki=$(tr -dc "aeiou" <<< "$word")
-        # Dolžina novega niza je število samoglasnikov, ta je nato dodan vrstici.
-        st_samoglasnikov=${#samoglasniki}
-        
-        # Izpis dolžine besede ni več potreben, saj se po njej ne sortira več.
         if [ $word_length -eq 0 ] || [ $length -eq $word_length ]; then
-            echo "$count $word $st_samoglasnikov"
+            echo "$count $word $length"
         fi
     done
 }
 
-# Funkcija format sedaj namesto dolžine besede prejme število samoglasnikov.
 format() {
-    while read count word samoglasniki; do
+    while read count word length; do
         relative=$(( 10000 * $count / $1 ))
         
         if [ $relative -eq 0 ]; then
@@ -77,8 +70,7 @@ format() {
             frequency="${integer}.${decimal}"
         fi
         
-        # V končnem izpisu je potrebno ohraniti število samoglasnikov.
-        echo "${count} ${word} ${samoglasniki} ${frequency}%"
+        echo "${count} ${word} ${frequency}%"
     done
 }
 
@@ -89,7 +81,4 @@ if [ -z "$words" ]; then
 fi
 
 total_words=$(wc -l <<< "$words")
-
-# Spremeni se sortiranje. Tu se sedaj najprej sortira po številu samoglasnikov
-# in odstrani sortiranje po dolžini besede, saj ta ni več prisotna.
-sort <<< "$words" | uniq -c | prepare | sort -rn -k3,3 -k1,1 -k2,2b | format $total_words
+sort <<< "$words" | uniq -c | prepare | sort -rn -k1,1 -k3,3 -k2,2b | format $total_words

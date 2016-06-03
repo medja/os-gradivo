@@ -1,10 +1,9 @@
 #!/bin/bash
 
-# Spremeni se vzorec za besedo, ta sedaj vzame le po eno črko.
-# Torej postane vzorec za črke.
-WORD="[[:alpha:]]"
+WORD="[[:alpha:]]*"
 
 min_count=1
+word_length=0
 
 while [ $# -gt 0 ]; do
     if [ "${1:0:1}" = "-" ]; then
@@ -12,7 +11,9 @@ while [ $# -gt 0 ]; do
             -n)
                 min_count=$2
                 ;;
-            # Stikalo za omejitev na dolžini besede tu ni uporabno.
+            -l)
+                word_length=$2
+                ;;
              *)
                 echo "Napaka: neznano stikalo $1." >&2
                 exit 1
@@ -44,13 +45,34 @@ prepare() {
             continue
         fi
         
-        # Omejitev na dolžini besede tu ni uporabna.
+        length=${#word}
         
-        echo "$count $word"
+        if [ $word_length -eq 0 ] || [ $length -eq $word_length ]; then
+            echo "$count $word $length"
+        fi
     done
 }
 
-# Funkcija format za to nadgradnjo ni potrebna.
+format() {
+    while read count word length; do
+        relative=$(( 10000 * $count / $1 ))
+        
+        if [ $relative -eq 0 ]; then
+            frequency="0"
+        elif [ $relative -lt 10 ]; then
+            frequency=".0$relative"
+        elif [ $relative -lt 100 ]; then
+            frequency=".$relative"
+        else
+            length=${#relative}
+            integer=${relative:0:$length - 2}
+            decimal=${relative: -2}
+            frequency="${integer}.${decimal}"
+        fi
+        
+        echo "${count} ${word} ${frequency}%"
+    done
+}
 
 words=$(parse $file)
 
@@ -58,6 +80,5 @@ if [ -z "$words" ]; then
     exit 0
 fi
 
-# Pri procesiranju je sedaj dovolj da se prešteje število ponovitev
-# črk in nato uredi izpis vrstice ter uredi izpis po številu ponovitev.
-sort <<< "$words" | uniq -c | prepare | sort -rn -k1,1
+total_words=$(wc -l <<< "$words")
+sort <<< "$words" | uniq -c | prepare | sort -rn -k1,1 -k3,3 -k2,2b | format $total_words

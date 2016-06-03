@@ -14,10 +14,6 @@ while [ $# -gt 0 ]; do
             -l)
                 word_length=$2
                 ;;
-            # Stikalo -c shrani svojo vrednost, kot začetno črko.
-            -c)
-                prva_crka="$2"
-                ;;
              *)
                 echo "Napaka: neznano stikalo $1." >&2
                 exit 1
@@ -46,12 +42,6 @@ parse() {
 prepare() {
     while read count word; do
         if [ $count -lt $min_count ]; then
-            continue
-        fi
-        
-        # Če je nastavljena omejitev na prvi črki in se prva črka besede
-        # ne ujema, se ta beseda oziroma vrstica preskoči.
-        if [ ! -z "$prva_crka" ] && [ "$prva_crka" != "${word:0:1}" ]; then
             continue
         fi
         

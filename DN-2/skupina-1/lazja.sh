@@ -2,28 +2,14 @@
 
 WORD="[[:alpha:]]*"
 
-# Privzeto najmanjse stevilo omejitev je nastavljeno na 0.
-# V tem primeru, je omejitev na pojavitvah besede izklopljena.
-min_count=0
+min_count=1
 word_length=0
-
-# Primerjalni operator pri preverjanju pojavitev besed.
-# Privzeto se ne izpisejo besede, ki se ne pojavijo dovoljkrat.
-omejitev="-lt"
 
 while [ $# -gt 0 ]; do
     if [ "${1:0:1}" = "-" ]; then
         case "$1" in
             -n)
-                # V primeru, da stikalo -n dobi število s pomišljajem,
-                # je potrebno spremeniti omejitev na številu pojativev
-                # in izluščiti ta pomišljaj iz vrednosti stikala.
-                if [ "${2:0:1}" = "-" ]; then
-                    min_count="${2:1}"
-                    omejitev="-gt"
-                else
-                    min_count="$2"
-                fi
+                min_count=$2
                 ;;
             -l)
                 word_length=$2
@@ -55,9 +41,7 @@ parse() {
 
 prepare() {
     while read count word; do
-        # Dodan je pogoj za izklop omejitve in spremenjen operator.
-        # Ker je ta v resnici argument ukaza test, se lahko tu uporabi spremenljivka.
-        if [ $min_count -gt 0 ] && [ $count $omejitev $min_count ]; then
+        if [ $count -lt $min_count ]; then
             continue
         fi
         

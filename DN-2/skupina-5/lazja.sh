@@ -14,17 +14,6 @@ while [ $# -gt 0 ]; do
             -l)
                 word_length=$2
                 ;;
-            # Portebno je dodati stikalo -I, ki določi ali se razlikuje velikost črk.
-            -I)
-                # V primeru stikala se $razlikuj nastavi na 1, drugače nima vrednosti.
-                razlikuj=1
-                # Ker imajo stikala privzeto 2 dela se spodaj izvede shift 2,
-                # ki se znebi dveh argumentov. A tu se je potrebno znebiti le
-                # enega, zato se shift izvede ročno, continue pa prepreči, da
-                # bi se izvedel spodnji shift 2.
-                shift
-                continue
-                ;;
              *)
                 echo "Napaka: neznano stikalo $1." >&2
                 exit 1
@@ -46,13 +35,7 @@ done
 
 parse() {
     for word in $(grep -o "$WORD" "$1"); do
-        # Če se ne razlikuje med velikostjo črt se izpiše beseda
-        # z malimi črkami, drugače pa v originalu.
-        if [ -z $razlikuj ]; then
-            echo ${word,,}
-        else
-            echo ${word}
-        fi
+        echo ${word,,}
     done
 }
 
@@ -98,7 +81,4 @@ if [ -z "$words" ]; then
 fi
 
 total_words=$(wc -l <<< "$words")
-
-# Pri sortiranju je potrebno sortirati neodvisno od velikosti črk, za to
-# poskrbi opcija f na drugem stolpcu (-k2,2).
-sort <<< "$words" | uniq -c | prepare | sort -rn -k1,1 -k3,3 -k2,2bf | format $total_words
+sort <<< "$words" | uniq -c | prepare | sort -rn -k1,1 -k3,3 -k2,2b | format $total_words
