@@ -34,7 +34,17 @@ while [ $# -gt 0 ]; do
 done
 
 parse() {
-    for word in $(grep -o "$WORD" "$1"); do
+    # Besedilo iz datoteke se shrani v spremenljivko. Če ime datoteke ni
+    # podano, se z uporabo ukaza cat to prebere iz standardnega vhoda,
+    # drugače pa iz podane datoteke.
+    if [ -z "$1" ]; then
+        besedilo=$(cat)
+    else
+        besedilo=$(cat "$1")
+    fi
+    
+    # Grep sedaj ne bere več direktno iz datoteke, temveč dobi vsebino že podano.
+    for word in $(grep -o "$WORD" <<< "$besedilo"); do
         echo ${word,,}
     done
 }
