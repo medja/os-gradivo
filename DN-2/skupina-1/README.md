@@ -1,6 +1,6 @@
 ## Lažja naloga
 
-[lazja.sh](https://github.com/medja/os-gradivo/commit/28cfde3ee14c5eb7127dafc2d393e950f67bf28f)
+[lazja.sh](https://github.com/medja/os-gradivo/commit/53f6f5fc23811fac239ebd8c6e251c844dc29a61)
 
 Število, ki ga podamo stikalu -n trenutno omeji izpis na besede, ki se pojavijo
 vsaj tolikokrat. Dopolnite program, da stikalu –n lahko pred številko dodamo
@@ -38,7 +38,7 @@ Izpiše vse besede, ki se pojavijo 3-krat ali manj.
 
 ## Težja naloga
 
-[tezja.sh](https://github.com/medja/os-gradivo/commit/28cfde3ee14c5eb7127dafc2d393e950f67bf28f)
+[tezja.sh](https://github.com/medja/os-gradivo/commit/ab49abe10a0f3f2142cab8319912f1bef7d95abf)
 
 Program naj izpiše koliko besed se začne z veliko začetnico in koliko z malo.
 

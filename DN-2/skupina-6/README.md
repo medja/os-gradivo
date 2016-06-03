@@ -1,6 +1,6 @@
 ## Lažja naloga
 
-[lazja.sh](https://github.com/medja/os-gradivo/commit/28cfde3ee14c5eb7127dafc2d393e950f67bf28f)
+[lazja.sh](https://github.com/medja/os-gradivo/commit/98e588e88f23130182daaa21b3ff5bdcee564985)
 
 Spremenite, da stikalu –l lahko za številko dodate pomišlaj, kar pomeni, da
 upošteva tudi besede, ki so večje od podanega števila.
@@ -16,7 +16,7 @@ upošteva tudi besede, ki so večje od podanega števila.
 
 ## Težja naloga
 
-[tezja.sh](https://github.com/medja/os-gradivo/commit/28cfde3ee14c5eb7127dafc2d393e950f67bf28f)
+[tezja.sh](https://github.com/medja/os-gradivo/commit/7e43722d0d2e44a6c7b26b58fc4aa063830c2bb9)
 
 Stikalo –k naj določa koren besede. Število, ki ga podamo stikalu kot argument
 pomeni koliko zadnjih črk ne upoštevamo. Režemo samo besede, ki so daljše od

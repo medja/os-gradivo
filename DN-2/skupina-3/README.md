@@ -1,6 +1,6 @@
 ## Lažja naloga
 
-[lazja.sh](https://github.com/medja/os-gradivo/commit/28cfde3ee14c5eb7127dafc2d393e950f67bf28f)
+[lazja.sh](https://github.com/medja/os-gradivo/commit/38458f685a8eac21c395d342472acd029320f3f8)
 
 Dodajte stikalo –p, ki omeji koliko vrstic besedila naj pregleda.
 
@@ -21,7 +21,7 @@ Dodajte stikalo –p, ki omeji koliko vrstic besedila naj pregleda.
 
 ## Težja naloga
 
-[tezja.sh](https://github.com/medja/os-gradivo/commit/28cfde3ee14c5eb7127dafc2d393e950f67bf28f)
+[tezja.sh](https://github.com/medja/os-gradivo/commit/9a8dd67db1194417d47b800112afc35328d42b3d)
 
 Program naj izpis uredi po besedah, ki vsebujejo največ samoglasnikov. Tiste
 besede z največ samoglasniki so na vrhu. Poleg besede izpišite še število

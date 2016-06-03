@@ -1,6 +1,6 @@
 ## Lažja naloga
 
-[lazja.sh](https://github.com/medja/os-gradivo/commit/28cfde3ee14c5eb7127dafc2d393e950f67bf28f)
+[lazja.sh](https://github.com/medja/os-gradivo/commit/db47aa6a634877d6da39ea0ed4d9c4a65e0767f4)
 
 Program naj izpiše samo tiste besede, ki se začnejo na določeno črko, ki jo
 podate s pomočjo stikala –c.
@@ -16,7 +16,7 @@ podate s pomočjo stikala –c.
 
 ## Težja naloga
 
-[tezja.sh](https://github.com/medja/os-gradivo/commit/28cfde3ee14c5eb7127dafc2d393e950f67bf28f)
+[tezja.sh](https://github.com/medja/os-gradivo/commit/dfd00413ec0f54589ad1aa5884d7bb0d51840c93)
 
 Program naj izpiše še statistiko: število ločil: .,:;!?, število odstavkov
 (new line) in število števil.
