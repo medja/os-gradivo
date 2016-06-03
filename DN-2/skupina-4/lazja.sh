@@ -14,6 +14,19 @@ while [ $# -gt 0 ]; do
             -l)
                 word_length=$2
                 ;;
+            # Portebno je dodati stikalo -N, kjer je N omejitev na številu besed.
+            # Ker to stikalo ni iz dveh delov je pogoj zanj nekoliko bolj zahteven.
+            # Stikalo se mora začeti s pomišljajem in nadaljevati s številom.
+            -[[:digit:]]*)
+                # Iz števila se odstrani pomišljal.
+                stevilo_besed=${1:1}
+                # Ker imajo stikala privzeto 2 dela se spodaj izvede shift 2,
+                # ki se znebi dveh argumentov. A tu se je potrebno znebiti le
+                # enega, zato se shift izvede ročno, continue pa prepreči, da
+                # bi se izvedel spodnji shift 2.
+                shift 1
+                continue
+                ;;
              *)
                 echo "Napaka: neznano stikalo $1." >&2
                 exit 1
@@ -81,4 +94,14 @@ if [ -z "$words" ]; then
 fi
 
 total_words=$(wc -l <<< "$words")
-sort <<< "$words" | uniq -c | prepare | sort -rn -k1,1 -k3,3 -k2,2b | format $total_words
+
+# Ker je izpis lahko omejen z številom besed se tu shrani v spremenljivko.
+izpis=$(sort <<< "$words" | uniq -c | prepare | sort -rn -k1,1 -k3,3 -k2,2b | format $total_words)
+
+# Če ni podana omejitev besed se prikaže celoten izpis,
+# drugače je ta omejen z ukazom head.
+if [ -z $stevilo_besed ]; then
+    cat <<< "$izpis"
+else
+    head -n "$stevilo_besed" <<< "$izpis"
+fi
