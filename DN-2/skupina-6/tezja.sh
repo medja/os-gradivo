@@ -14,6 +14,11 @@ while [ $# -gt 0 ]; do
             -l)
                 word_length=$2
                 ;;
+            # Doda se stikalo koren, ki določi ali ignoriramo zanjih nekaj
+            # črk dovolj dolgih besed.
+            -k)
+                koren=$2
+                ;;
              *)
                 echo "Napaka: neznano stikalo $1." >&2
                 exit 1
@@ -35,7 +40,15 @@ done
 
 parse() {
     for word in $(grep -o "$WORD" "$1"); do
-        echo ${word,,}
+        beseda=${word,,}
+        
+        # Če ni podan koren ali pa beseda ni daljša od korena, se ta izpiše
+        # v celoti. Drugače pa se izpiše beseda brez zadnjih nekaj znakov.
+        if [ -z $koren ] || [ ${#beseda} -le $koren ]; then
+            echo $beseda
+        else
+            echo ${beseda:0:-$koren}
+        fi
     done
 }
 
