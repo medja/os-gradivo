@@ -33,52 +33,42 @@ while [ $# -gt 0 ]; do
     fi
 done
 
+# Parse metoda bo sedaj namesto besed izpisala za vsako besedo velikost zacetnice.
 parse() {
     for word in $(grep -o "$WORD" "$1"); do
-        echo ${word,,}
-    done
-}
-
-prepare() {
-    while read count word; do
-        if [ $count -lt $min_count ]; then
-            continue
-        fi
-        
-        length=${#word}
-        
-        if [ $word_length -eq 0 ] || [ $length -eq $word_length ]; then
-            echo "$count $word $length"
-        fi
-    done
-}
-
-format() {
-    while read count word length; do
-        relative=$(( 10000 * $count / $1 ))
-        
-        if [ $relative -eq 0 ]; then
-            frequency="0"
-        elif [ $relative -lt 10 ]; then
-            frequency=".0$relative"
-        elif [ $relative -lt 100 ]; then
-            frequency=".$relative"
+        # Shrani se zacetnica besede, ce bo ta po povecanju se vedno enaka,
+        # to pomeni, da gre za veliko zacetnico.
+        zacetnica=${word:0:1}
+    
+        if [ $zacetnica = ${zacetnica^^} ]; then
+            echo "velika"
         else
-            length=${#relative}
-            integer=${relative:0:$length - 2}
-            decimal=${relative: -2}
-            frequency="${integer}.${decimal}"
+            echo "mala"
         fi
-        
-        echo "${count} ${word} ${frequency}%"
     done
 }
 
-words=$(parse $file)
+# Metoda prepare je odstranjena, saj za to nadgradnjo ni potrebna.
 
-if [ -z "$words" ]; then
-    exit 0
-fi
+# Metoda format sedaj prejme dve vrstici, najprej vrstico za majhne začetnice
+# in nato vrstico za velike začetnice.
+format() {
+    # S tem, ko se prebereta oba podatka, bo read sam ločil oba dela vrstice.
+    read malih mala_zacetnica
+    read velikih velika_zacetnica
+    
+    # Robni primer: če ni malih začetnic tudi njena vrstica ne obstaja.
+    if [ "$mala_zacetnica" != "mala" ]; then
+        # V tem primeru je število velikih začetnic enako številu malih,
+        # malih pa je v tem primeru ni.
+        velikih=$malih
+        malih=0
+    fi
+    
+    echo "Velika začetnica: ${velikih:-0}, mala začetnica: ${malih:-0}"
+}
 
-total_words=$(wc -l <<< "$words")
-sort <<< "$words" | uniq -c | prepare | sort -rn -k1,1 -k3,3 -k2,2b | format $total_words
+
+# Najprej prebere vse velik in majhne začetnice, preštejo koliko je katerih
+# in naredi izpis obeh vrstic.
+parse $file | sort | uniq -c | format
